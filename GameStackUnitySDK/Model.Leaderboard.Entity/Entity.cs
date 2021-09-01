@@ -96,12 +96,12 @@ namespace GameStackUnitySDK.Model.Leaderboard.Entity
         /// prev is a token that will provide the previous page of data when
         /// used as the token for a paginated request.
         /// </summary>
-        public Value prev;
+        public string prev;
         /// <summary>
         /// next is a token that will provide the next page of data when used
         /// as the token for a paginated request.
         /// </summary>
-        public bool next;
+        public string next;
     }
 }
 

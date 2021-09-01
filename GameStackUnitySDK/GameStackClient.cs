@@ -97,7 +97,7 @@ namespace GameStackUnitySDK
             _credentialsLock.EnterWriteLock();
             try
             {
-                if (_session != null)
+                if (session != null)
                 {
                     _session = session;
                 }
@@ -453,7 +453,9 @@ namespace GameStackUnitySDK
                 var now = DateTime.UtcNow;
                 var sessionExpiresIn = DateTime.Parse(
                     _session.session_expires_in);
-                return (now < sessionExpiresIn) && (now < tokenExpires);
+                var nowBeforeSessionExpires = now < sessionExpiresIn;
+                var nowBeforeTokenExpires = now < tokenExpires;
+                return nowBeforeSessionExpires && nowBeforeTokenExpires;
             }
             finally
             {
