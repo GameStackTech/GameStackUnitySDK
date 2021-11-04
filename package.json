@@ -1,0 +1,11 @@
+{
+    "name": "io.gamestack.sdk",
+    "version": "0.0.1",
+    "author": {
+        "name": "Lee Mitchell",
+        "email": "lee@gamstacktech.io"
+    },
+    "unity": "2021.2",
+    "displayName": "GameStackUnitySDK",
+    "description": "The official Unity SDK for the GameStack connected game creator service."
+}
