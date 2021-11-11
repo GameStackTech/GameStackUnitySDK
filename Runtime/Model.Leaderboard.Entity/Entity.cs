@@ -115,6 +115,14 @@ namespace GameStack.Model.Leaderboard.Entity
         }
 
         /// <summary>
+        /// Int produces a new integer Value from a string.
+        /// </summary>
+        public static Value Int(string value)
+        {
+            return new Value(value, DataType.Int);
+        }
+
+        /// <summary>
         /// Float produces a new floating point Value from a double.
         /// </summary>
         public static Value Float(double value)
@@ -128,6 +136,14 @@ namespace GameStack.Model.Leaderboard.Entity
         public static Value Float(float value)
         {
             return new Value(value.ToString(), DataType.Float);
+        }
+
+        /// <summary>
+        /// Float produces a new floating point Value from a string.
+        /// </summary>
+        public static Value Float(string value)
+        {
+            return new Value(value, DataType.Float);
         }
 
         /// <summary>
@@ -479,6 +495,96 @@ namespace GameStack.Model.Leaderboard.Entity
             return typeof(Filter).FullName + ":: op: " +
                 op + " target: " + target + " val: " + val.ToString() + " not: "
                 + not;
+        }
+
+        /// <summary>
+        /// Eq returns a filter that requires the target field
+        /// be equal to the specified value.
+        /// </summary>
+        public static Filter Eq(string target, Value val)
+        {
+            return new Filter(FilterOperation.Eq, target, val);
+        }
+
+        /// <summary>
+        /// NEq returns a filter that requires the target field
+        /// be not equal to the specified value.
+        /// </summary>
+        public static Filter NEq(string target, Value val)
+        {
+            return new Filter(FilterOperation.Eq, target, val, true);
+        }
+
+        /// <summary>
+        /// GT returns a filter that requires the target field
+        /// be greater than the specified value.
+        /// </summary>
+        public static Filter GT(string target, Value val)
+        {
+            return new Filter(FilterOperation.GT, target, val);
+        }
+
+        /// <summary>
+        /// NGT returns a filter that requires the target field
+        /// be not greater than the specified value.
+        /// </summary>
+        public static Filter NGT(string target, Value val)
+        {
+            return new Filter(FilterOperation.GT, target, val, true);
+        }
+
+        /// <summary>
+        /// LT returns a filter that requires the target field
+        /// be less than the specified value.
+        /// </summary>
+        public static Filter LT(string target, Value val)
+        {
+            return new Filter(FilterOperation.LT, target, val);
+        }
+
+        /// <summary>
+        /// NLT returns a filter that requires the target field
+        /// be not less than the specified value.
+        /// </summary>
+        public static Filter NLT(string target, Value val)
+        {
+            return new Filter(FilterOperation.LT, target, val, true);
+        }
+
+        /// <summary>
+        /// GTE returns a filter that requires the target field
+        /// be greater than or equal to the specified value.
+        /// </summary>
+        public static Filter GTE(string target, Value val)
+        {
+            return new Filter(FilterOperation.GTE, target, val);
+        }
+
+        /// <summary>
+        /// NGTE returns a filter that requires the target field
+        /// be not greater than or equal to the specified value.
+        /// </summary>
+        public static Filter NGTE(string target, Value val)
+        {
+            return new Filter(FilterOperation.GTE, target, val, true);
+        }
+
+        /// <summary>
+        /// LTE returns a filter that requires the target field
+        /// be less than or equal to the specified value.
+        /// </summary>
+        public static Filter LTE(string target, Value val)
+        {
+            return new Filter(FilterOperation.LTE, target, val);
+        }
+
+        /// <summary>
+        /// NLTE returns a filter that requires the target field
+        /// be less than or equal to the specified value.
+        /// </summary>
+        public static Filter NLTE(string target, Value val)
+        {
+            return new Filter(FilterOperation.LTE, target, val, true);
         }
     }
 
