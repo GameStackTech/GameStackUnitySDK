@@ -171,10 +171,10 @@ namespace GameStack
         /// the currently valid session and token credentials using a write lock
         /// to allow async access.
         /// </summary>
-        /// <param name="session">
+        /// <param name="session" cref="Session">
         /// The optional session that will be set as the valid session.
         /// </param>
-        /// <param name="token">
+        /// <param name="token" cref="Token">
         /// The token that will be set as the valid token.
         /// </param>
         private void SetCredentials(Session session, Token token)
@@ -203,10 +203,9 @@ namespace GameStack
         /// <param name="refreshToken">
         /// The refresh token to use for the refresh request.
         /// </param>
-        /// <param name="session">
+        /// <param name="session" cref="Session">
         /// The players session that was obtained on login.
         /// </param>
-        /// <param name="session">The current session.</param>
         private IEnumerator RefreshToken(string refreshToken, Session session)
         {
             UnityAction<RefreshTokenOutput> cbSuccess = (output) =>
@@ -527,7 +526,7 @@ namespace GameStack
         /// SetApplicationUser assigns the user as the current application user
         /// using a write lock to allow async access.
         /// </summary>
-        /// <param name="user">
+        /// <param name="user" cref="User">
         /// The user user that will be set as the current application user.
         /// </param>
         private void SetApplicationUser(User user)
@@ -562,6 +561,9 @@ namespace GameStack
             input.sort = props.Sort;
             input.pagination = props.Pagination;
 
+            Debug.Log("**** props.Pagination " + props.Pagination);
+            Debug.Log("**** input.pagination " + input.pagination);
+
             Func<string, GetLeaderboardStatsOutput> jsonUnmarshaler = (data) =>
             {
                 return GetLeaderboardStatsOutput.FromJSON(data);
@@ -569,6 +571,9 @@ namespace GameStack
 
             try
             {
+                var ot = JsonUtility.ToJson(input);
+                Debug.Log("**** ot " + ot);
+
                 SendRequest(WebRequestMethods.Http.Post,
                     GameStackRESTClientUtil.GenerateHeaders(GetToken()),
                     GameStackClientConfig.GetGameStackLeaderboardURL(path),

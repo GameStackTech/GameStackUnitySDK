@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using GameStack.Model.Leaderboard.Enums;
+using UnityEngine;
 
 namespace GameStack.Model.Leaderboard.Entity
 {
@@ -615,14 +616,6 @@ namespace GameStack.Model.Leaderboard.Entity
         /// </summary>
         public string next;
 
-        public Pagination()
-        {
-            count = 0;
-            token = null;
-            prev = null;
-            next = null;
-        }
-
         public Pagination(int count, string token, string prev, string next)
         {
             this.count = count;
@@ -631,11 +624,50 @@ namespace GameStack.Model.Leaderboard.Entity
             this.next = next;
         }
 
+        public Pagination(string token)
+        {
+            this.token = token;
+        }
+
         public override string ToString()
         {
             return typeof(Pagination).FullName + ":: count: " +
                 count + " token: " + token + " prev: " + prev + " next: "
                 + next;
+        }
+
+        /// <summary>
+        /// Prev extracts the preious page token from a pagination
+        /// object and returns a pagination object configured
+        /// to get the previous page of stats.
+        /// </summary>
+        /// <param name="pagination" cref="Pagination">
+        /// The pagination object that contains the previous page
+        /// token that will be used to paginate the results.
+        /// </param>
+        /// <returns cref="Pagination">
+        /// A pagination object configured to get the previous page of results.
+        /// </returns>
+        public static Pagination Prev(Pagination pagination)
+        {
+            return new Pagination(pagination?.prev ?? "");
+        }
+
+        /// <summary>
+        /// Next extracts the next page token from a pagination
+        /// object and returns a pagination object configured
+        /// to get the next page of stats.
+        /// </summary>
+        /// <param name="pagination" cref="Pagination">
+        /// The pagination object that contains the next page token
+        /// that will be used to paginate the results.
+        /// </param>
+        /// <returns cref="Pagination">
+        /// A pagination object configured to get the next page of results.
+        /// </returns>
+        public static Pagination Next(Pagination pagination)
+        {
+            return new Pagination(pagination?.next ?? "");
         }
     }
 }
